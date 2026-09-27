@@ -1,0 +1,11 @@
+# Python 3.11-3.12
+numpy==2.4.4
+pandas==3.0.2
+scipy>=1.14
+scikit-learn==1.8.0
+matplotlib>=3.9
+dp-accounting==0.6.0
+pytest
+# only for the PyTorch validation suite and the earlier scripts in src/ (not needed for src/dp_ppnn.py)
+torch==2.14.0
+numba==0.67.0

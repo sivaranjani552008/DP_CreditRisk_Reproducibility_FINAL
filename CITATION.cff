@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Reproducibility and claim-audit package for the differential-privacy credit-risk neural-network study"
+title: "Differential Privacy Credit-Risk Neural Network Reproducibility Package"
+type: software
+license: MIT
+version: 1.0.0
+authors:
+  - family-names: "Naresh"
+    given-names: "V. S."
+  - family-names: "Reddi"
+    given-names: "Sivaranjani"
+  - family-names: "Thamarai"
+    given-names: "M."
