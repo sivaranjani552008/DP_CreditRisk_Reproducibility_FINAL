@@ -1,0 +1,14 @@
+{
+  "configurations": 40,
+  "paired_runs": 120,
+  "laplace_higher_auc_configs": 37,
+  "laplace_higher_acc_configs": 36,
+  "laplace_equal_acc_configs": 2,
+  "laplace_lower_loss_configs": 28,
+  "laplace_higher_auc_paired_runs": 109,
+  "mean_auc_gain": 0.15026793401472,
+  "mean_acc_gain": 0.09592115534738486,
+  "best_laplace_acc": 0.9090554254488681,
+  "best_gaussian_acc": 0.8481654957064793,
+  "runtime_seconds": 867.618114233017
+}

@@ -1,0 +1,10 @@
+quantity,value
+records,4269
+columns,14
+training_records,3415
+test_records,854
+train_rejected,1290
+train_approved,2125
+test_rejected,323
+test_approved,531
+input_features_after_cleaning,11

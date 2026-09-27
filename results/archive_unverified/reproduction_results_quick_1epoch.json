@@ -1,0 +1,568 @@
+{
+  "script": "reproduce_article.py",
+  "timestamp_utc": "2026-09-24T08:42:55Z",
+  "environment": {
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "torch": "2.10.0+cpu",
+    "cuda_available": false,
+    "cuda_device": null,
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "sklearn": "1.8.0",
+    "device_used": "cpu"
+  },
+  "fixed_settings": {
+    "seed_for_split": 42,
+    "split": "stratified train_test_split(test_size=0.20, random_state=42)",
+    "categorical_encoding": {
+      "education": {
+        "Graduate": 1,
+        "Not Graduate": 0
+      },
+      "self_employed": {
+        "Yes": 1,
+        "No": 0
+      }
+    },
+    "scaling": "StandardScaler fit on training partition only",
+    "include_loan_id": true,
+    "gradient_noise": "Laplace(C/epsilon) added to each clipped minibatch mean; Gaussian sigma*C/batch_size comparator"
+  },
+  "dataset_audit": {
+    "path": "loan_approval_dataset.csv",
+    "sha256": "996bfe05f4bad6bbd104ac7bb8e0329dcc0ece7c16c6956294154795d506e0ca",
+    "rows": 4269,
+    "columns": 13,
+    "column_names": [
+      "loan_id",
+      "no_of_dependents",
+      "education",
+      "self_employed",
+      "income_annum",
+      "loan_amount",
+      "loan_term",
+      "cibil_score",
+      "residential_assets_value",
+      "commercial_assets_value",
+      "luxury_assets_value",
+      "bank_asset_value",
+      "loan_status"
+    ],
+    "predictor_count_including_loan_id": 12,
+    "feature_names": [
+      "loan_id",
+      "no_of_dependents",
+      "education",
+      "self_employed",
+      "income_annum",
+      "loan_amount",
+      "loan_term",
+      "cibil_score",
+      "residential_assets_value",
+      "commercial_assets_value",
+      "luxury_assets_value",
+      "bank_asset_value"
+    ],
+    "missing_values": 0,
+    "class_counts": {
+      "rejected_0": 1613,
+      "approved_1": 2656
+    },
+    "class_percentages": {
+      "rejected_0": 37.78402436167721,
+      "approved_1": 62.215975638322796
+    }
+  },
+  "article_claims": {
+    "article_reported": {
+      "records": 4269,
+      "predictors": 12,
+      "split": "80% train / 20% test",
+      "architecture": "12-64-32-1; ReLU hidden layers and Sigmoid output",
+      "optimizer": "Adam",
+      "learning_rate": 0.001,
+      "maximum_epochs": 120,
+      "batch_sizes": [
+        1,
+        32,
+        64
+      ],
+      "clipping_norm": 1.0,
+      "laplace_epsilons": [
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        1.0,
+        2.0,
+        4.0,
+        6.0,
+        8.0
+      ],
+      "gaussian_sigma": 1.1,
+      "reported_roc_auc": 0.99,
+      "reported_mia_auc": 0.512,
+      "reported_table2": {
+        "laplace_accuracy": {
+          "1": 0.924,
+          "32": 0.918,
+          "64": 0.909
+        },
+        "laplace_loss": {
+          "1": 0.18,
+          "32": 0.2,
+          "64": 0.22
+        },
+        "dp_sgd_accuracy": {
+          "1": 0.897,
+          "32": 0.875,
+          "64": 0.852
+        },
+        "dp_sgd_loss": {
+          "1": 0.24,
+          "32": 0.28,
+          "64": 0.31
+        }
+      }
+    },
+    "reconstruction_limitations": [
+      "No source code or random seed is supplied.",
+      "No preprocessing/encoding/scaling recipe is supplied; this reconstruction binary-encodes the two categorical fields and standardizes predictors using training data only.",
+      "The article describes both sequential and parallel/batch algorithms but gives no processor count or executed partition indices; this implementation uses sequential minibatch updates.",
+      "The article does not specify a complete TensorFlow Privacy accountant call; the Gaussian comparator is a clipped-gradient mechanism-level reconstruction.",
+      "The input and output noise stages are described conceptually but no numeric sensitivity or experiment settings are given; the main metrics therefore use the explicitly parameterized gradient mechanism."
+    ]
+  },
+  "results": [
+    {
+      "name": "nonprivate_batch32_long",
+      "settings": {
+        "seed": 43,
+        "learning_rate": 0.001,
+        "batch_size": 32,
+        "epochs": 1
+      },
+      "test": {
+        "accuracy": 0.914519906323185,
+        "precision": 0.9304511278195489,
+        "recall": 0.9322033898305084,
+        "f1": 0.9313264346190028,
+        "roc_auc": 0.9709234868493932,
+        "pr_auc": 0.98370895192854,
+        "brier_score": 0.07394478180192784,
+        "log_loss": 0.2625125194205938,
+        "confusion_matrix_labels_0_1": [
+          [
+            286,
+            37
+          ],
+          [
+            36,
+            495
+          ]
+        ],
+        "n": 854
+      },
+      "train": {
+        "accuracy": 0.9162518301610542,
+        "precision": 0.9355755566082425,
+        "recall": 0.9294117647058824,
+        "f1": 0.9324834749763928,
+        "roc_auc": 0.9679230278157775,
+        "pr_auc": 0.9786237765385712,
+        "brier_score": 0.0751551813101939,
+        "log_loss": 0.26821350299852376,
+        "confusion_matrix_labels_0_1": [
+          [
+            1154,
+            136
+          ],
+          [
+            150,
+            1975
+          ]
+        ],
+        "n": 3415
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.26821354031562805
+        }
+      ],
+      "runtime_seconds": 0.8505959510803223
+    },
+    {
+      "name": "nonprivate_batch64_long",
+      "settings": {
+        "seed": 44,
+        "learning_rate": 0.001,
+        "batch_size": 64,
+        "epochs": 1
+      },
+      "test": {
+        "accuracy": 0.8278688524590164,
+        "precision": 0.7900302114803626,
+        "recall": 0.9849340866290018,
+        "f1": 0.8767812238055323,
+        "roc_auc": 0.9595715776646668,
+        "pr_auc": 0.9767015080495547,
+        "brier_score": 0.1358123120256056,
+        "log_loss": 0.43724696208928343,
+        "confusion_matrix_labels_0_1": [
+          [
+            184,
+            139
+          ],
+          [
+            8,
+            523
+          ]
+        ],
+        "n": 854
+      },
+      "train": {
+        "accuracy": 0.8210834553440702,
+        "precision": 0.7891520244461421,
+        "recall": 0.9722352941176471,
+        "f1": 0.8711785789584651,
+        "roc_auc": 0.9506816233470132,
+        "pr_auc": 0.9700076006986001,
+        "brier_score": 0.1386457766411911,
+        "log_loss": 0.44374687030526616,
+        "confusion_matrix_labels_0_1": [
+          [
+            738,
+            552
+          ],
+          [
+            59,
+            2066
+          ]
+        ],
+        "n": 3415
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.4437468647956848
+        }
+      ],
+      "runtime_seconds": 0.060051918029785156
+    },
+    {
+      "name": "laplace_eps0p2_batch32_long",
+      "settings": {
+        "seed": 45,
+        "learning_rate": 0.001,
+        "batch_size": 32,
+        "epochs": 1,
+        "mechanism": "laplace",
+        "epsilon": 0.2,
+        "clipping_norm": 1.0
+      },
+      "test": {
+        "accuracy": 0.6381733021077284,
+        "precision": 0.8627450980392157,
+        "recall": 0.4971751412429379,
+        "f1": 0.6308243727598566,
+        "roc_auc": 0.7748800382478296,
+        "pr_auc": 0.8529887905003459,
+        "brier_score": 0.24343133717921783,
+        "log_loss": 0.679991710281184,
+        "confusion_matrix_labels_0_1": [
+          [
+            281,
+            42
+          ],
+          [
+            267,
+            264
+          ]
+        ],
+        "n": 854
+      },
+      "train": {
+        "accuracy": 0.6609077598828696,
+        "precision": 0.8934092758340114,
+        "recall": 0.5167058823529411,
+        "f1": 0.6547406082289803,
+        "roc_auc": 0.8099471044231646,
+        "pr_auc": 0.8756135385014445,
+        "brier_score": 0.2422522230845026,
+        "log_loss": 0.6776301223457964,
+        "confusion_matrix_labels_0_1": [
+          [
+            1159,
+            131
+          ],
+          [
+            1027,
+            1098
+          ]
+        ],
+        "n": 3415
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6776301264762878
+        }
+      ],
+      "runtime_seconds": 0.4153265953063965
+    },
+    {
+      "name": "laplace_eps0p2_batch32_short",
+      "settings": {
+        "seed": 46,
+        "learning_rate": 0.001,
+        "batch_size": 32,
+        "epochs": 1,
+        "mechanism": "laplace",
+        "epsilon": 0.2,
+        "clipping_norm": 1.0
+      },
+      "test": {
+        "accuracy": 0.4929742388758782,
+        "precision": 0.6225,
+        "recall": 0.4689265536723164,
+        "f1": 0.5349087003222341,
+        "roc_auc": 0.48682024103129207,
+        "pr_auc": 0.6162211320282195,
+        "brier_score": 0.2512486293923366,
+        "log_loss": 0.695650201139132,
+        "confusion_matrix_labels_0_1": [
+          [
+            172,
+            151
+          ],
+          [
+            282,
+            249
+          ]
+        ],
+        "n": 854
+      },
+      "train": {
+        "accuracy": 0.5004392386530014,
+        "precision": 0.6256748650269947,
+        "recall": 0.4908235294117647,
+        "f1": 0.5501054852320675,
+        "roc_auc": 0.49753926128590964,
+        "pr_auc": 0.6224979317201265,
+        "brier_score": 0.2506584550103139,
+        "log_loss": 0.6944668961064395,
+        "confusion_matrix_labels_0_1": [
+          [
+            666,
+            624
+          ],
+          [
+            1082,
+            1043
+          ]
+        ],
+        "n": 3415
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6944668292999268
+        }
+      ],
+      "runtime_seconds": 0.41167259216308594
+    },
+    {
+      "name": "laplace_eps0p5_batch32_short",
+      "settings": {
+        "seed": 47,
+        "learning_rate": 0.001,
+        "batch_size": 32,
+        "epochs": 1,
+        "mechanism": "laplace",
+        "epsilon": 0.5,
+        "clipping_norm": 1.0
+      },
+      "test": {
+        "accuracy": 0.6147540983606558,
+        "precision": 0.6191037735849056,
+        "recall": 0.9887005649717514,
+        "f1": 0.7614213197969543,
+        "roc_auc": 0.3859036924314775,
+        "pr_auc": 0.5361223407255102,
+        "brier_score": 0.245762442779084,
+        "log_loss": 0.6846760229840697,
+        "confusion_matrix_labels_0_1": [
+          [
+            0,
+            323
+          ],
+          [
+            6,
+            525
+          ]
+        ],
+        "n": 854
+      },
+      "train": {
+        "accuracy": 0.6181551976573938,
+        "precision": 0.6208419193405946,
+        "recall": 0.9924705882352941,
+        "f1": 0.7638536762042738,
+        "roc_auc": 0.3940565435476516,
+        "pr_auc": 0.5375569867537082,
+        "brier_score": 0.24516871826426295,
+        "log_loss": 0.6834857435043485,
+        "confusion_matrix_labels_0_1": [
+          [
+            2,
+            1288
+          ],
+          [
+            16,
+            2109
+          ]
+        ],
+        "n": 3415
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.683485746383667
+        }
+      ],
+      "runtime_seconds": 0.3900420665740967
+    },
+    {
+      "name": "laplace_eps2p0_batch32_short",
+      "settings": {
+        "seed": 48,
+        "learning_rate": 0.001,
+        "batch_size": 32,
+        "epochs": 1,
+        "mechanism": "laplace",
+        "epsilon": 2.0,
+        "clipping_norm": 1.0
+      },
+      "test": {
+        "accuracy": 0.4168618266978923,
+        "precision": 0.5563139931740614,
+        "recall": 0.3069679849340866,
+        "f1": 0.39563106796116504,
+        "roc_auc": 0.40410347903657445,
+        "pr_auc": 0.5708277198820624,
+        "brier_score": 0.2566711746141346,
+        "log_loss": 0.7065321945450771,
+        "confusion_matrix_labels_0_1": [
+          [
+            193,
+            130
+          ],
+          [
+            368,
+            163
+          ]
+        ],
+        "n": 854
+      },
+      "train": {
+        "accuracy": 0.43045387994143486,
+        "precision": 0.5797872340425532,
+        "recall": 0.30776470588235294,
+        "f1": 0.4020903781125115,
+        "roc_auc": 0.427381121751026,
+        "pr_auc": 0.588965171722845,
+        "brier_score": 0.25547335923752734,
+        "log_loss": 0.704123282045125,
+        "confusion_matrix_labels_0_1": [
+          [
+            816,
+            474
+          ],
+          [
+            1471,
+            654
+          ]
+        ],
+        "n": 3415
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.704123318195343
+        }
+      ],
+      "runtime_seconds": 0.37734341621398926
+    },
+    {
+      "name": "gaussian_sigma1p1_batch32_short",
+      "settings": {
+        "seed": 49,
+        "learning_rate": 0.001,
+        "batch_size": 32,
+        "epochs": 1,
+        "mechanism": "gaussian",
+        "epsilon": 0.2,
+        "clipping_norm": 1.0,
+        "gaussian_sigma": 1.1
+      },
+      "test": {
+        "accuracy": 0.6885245901639344,
+        "precision": 0.6906474820143885,
+        "recall": 0.903954802259887,
+        "f1": 0.7830342577487766,
+        "roc_auc": 0.7416755581209586,
+        "pr_auc": 0.8280786339891939,
+        "brier_score": 0.23852328958404403,
+        "log_loss": 0.6701345170636702,
+        "confusion_matrix_labels_0_1": [
+          [
+            108,
+            215
+          ],
+          [
+            51,
+            480
+          ]
+        ],
+        "n": 854
+      },
+      "train": {
+        "accuracy": 0.6834553440702782,
+        "precision": 0.6851063829787234,
+        "recall": 0.9091764705882353,
+        "f1": 0.7813953488372093,
+        "roc_auc": 0.7329233014135886,
+        "pr_auc": 0.8136706165965779,
+        "brier_score": 0.2385710554082229,
+        "log_loss": 0.670226476374521,
+        "confusion_matrix_labels_0_1": [
+          [
+            402,
+            888
+          ],
+          [
+            193,
+            1932
+          ]
+        ],
+        "n": 3415
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.670226514339447
+        }
+      ],
+      "runtime_seconds": 0.3096330165863037
+    }
+  ],
+  "membership_inference": {
+    "protocol": "fit and evaluated on the same confidence rows, as described in the article",
+    "auc": 0.5081975785297678,
+    "n_members": 3415,
+    "n_nonmembers": 854,
+    "attack_accuracy": 0.7999531506207542
+  }
+}

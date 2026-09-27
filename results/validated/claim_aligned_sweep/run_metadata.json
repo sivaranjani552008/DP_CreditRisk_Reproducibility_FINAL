@@ -1,0 +1,23 @@
+{
+  "dataset": "data/loan_approval_dataset.csv",
+  "seed": 42,
+  "epochs": 10,
+  "lr": 0.001,
+  "clip": 1.0,
+  "delta": 1e-05,
+  "features": [
+    "no_of_dependents",
+    "education",
+    "self_employed",
+    "income_annum",
+    "loan_amount",
+    "loan_term",
+    "cibil_score",
+    "residential_assets_value",
+    "commercial_assets_value",
+    "luxury_assets_value",
+    "bank_asset_value"
+  ],
+  "architecture": "11-64-32-1",
+  "note": "paper_protocol uses epsilon separately for data, each gradient update, and output; it is not a composed total epsilon guarantee. strict_composed allocates 20%/70%/10% of total epsilon to data/training/output using basic composition; Gaussian uses the basic Gaussian mechanism, not a moments accountant."
+}

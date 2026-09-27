@@ -1,0 +1,109 @@
+{
+  "S3_matched": {
+    "configs": 36,
+    "laplace": 11,
+    "gaussian": 0,
+    "tie": 25
+  },
+  "S3_natural": {
+    "configs": 36,
+    "laplace": 0,
+    "gaussian": 26,
+    "tie": 10
+  },
+  "S3_matched_bal_acc": {
+    "configs": 36,
+    "laplace": 4,
+    "gaussian": 0,
+    "tie": 32
+  },
+  "S4_matched": {
+    "configs": 32,
+    "laplace": 9,
+    "gaussian": 0,
+    "tie": 23
+  },
+  "S4_natural": {
+    "configs": 32,
+    "laplace": 0,
+    "gaussian": 32,
+    "tie": 0
+  },
+  "S5": {
+    "configs": 12,
+    "laplace": 4,
+    "gaussian": 0,
+    "tie": 8
+  },
+  "S7": {
+    "configs": 9,
+    "laplace": 9,
+    "gaussian": 0,
+    "tie": 0
+  },
+  "S7_acc": {
+    "configs": 9,
+    "laplace": 9,
+    "gaussian": 0,
+    "tie": 0
+  },
+  "S8_per_feature_noisy": {
+    "configs": 9,
+    "laplace": 4,
+    "gaussian": 0,
+    "tie": 5
+  },
+  "S8_per_feature_clean": {
+    "configs": 9,
+    "laplace": 4,
+    "gaussian": 0,
+    "tie": 5
+  },
+  "S8_record_noisy": {
+    "configs": 9,
+    "laplace": 4,
+    "gaussian": 1,
+    "tie": 4
+  },
+  "S8_record_clean": {
+    "configs": 9,
+    "laplace": 4,
+    "gaussian": 0,
+    "tie": 5
+  },
+  "S4_matched_K1": {
+    "configs": 8,
+    "laplace": 5,
+    "gaussian": 0,
+    "tie": 3
+  },
+  "S4_matched_K2": {
+    "configs": 8,
+    "laplace": 4,
+    "gaussian": 0,
+    "tie": 4
+  },
+  "S4_matched_K5": {
+    "configs": 8,
+    "laplace": 0,
+    "gaussian": 0,
+    "tie": 8
+  },
+  "S4_matched_K10": {
+    "configs": 8,
+    "laplace": 0,
+    "gaussian": 0,
+    "tie": 8
+  },
+  "tradeoff_monotone_auc_curves": {
+    "curves": 18,
+    "monotone": 18
+  },
+  "tradeoff_output_monotone": true,
+  "S3_matched_loss": {
+    "configs": 36,
+    "laplace_lower_mean": 27,
+    "laplace_sig_lower": 11,
+    "laplace_sig_higher": 2
+  }
+}

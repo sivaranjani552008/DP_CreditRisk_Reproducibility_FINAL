@@ -1,0 +1,8 @@
+
+CLAIM-SUPPORT COMPARISON (observed; no target values hard-coded)
+   configuration  laplace  gaussian  laplace_minus_gaussian_pp  laplace_higher
+ B=32, epsilon=8  43.9110   38.5246                     5.3864            True
+B=32, epsilon=32  38.9930   38.9930                     0.0000           False
+ B=64, epsilon=8  63.1148   41.8033                    21.3115            True
+B=64, epsilon=32  38.1733   43.9110                    -5.7377           False
+Completed claim-check in 6.584273338317871 seconds

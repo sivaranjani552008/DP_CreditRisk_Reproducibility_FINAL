@@ -1,0 +1,7 @@
+   configuration  batch_size  epsilon  epochs  gaussian  laplace  laplace_minus_gaussian_pp  laplace_higher
+B=32, epsilon=32          32  32.0000      10   62.1780  92.2717                    30.0937            True
+ B=32, epsilon=8          32   8.0000      10   62.1780  62.5293                     0.3513            True
+B=64, epsilon=32          64  32.0000      10   62.1780  93.4426                    31.2646            True
+ B=64, epsilon=8          64   8.0000      10   62.1780  62.1780                     0.0000           False
+
+No published/target accuracy was used in computation.

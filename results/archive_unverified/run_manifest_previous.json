@@ -1,0 +1,33 @@
+{
+  "dataset": "loan_approval_dataset.csv",
+  "dataset_sha256": "996bfe05f4bad6bbd104ac7bb8e0329dcc0ece7c16c6956294154795d506e0ca",
+  "architecture": "11-64-32-1",
+  "split": "80/20 stratified, random_state=42",
+  "learning_rate": 0.001,
+  "gradient_clip_L1": 1.0,
+  "batch_sizes": [
+    1,
+    32,
+    64
+  ],
+  "epsilons": [
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    1,
+    2,
+    4,
+    6,
+    8
+  ],
+  "mechanisms": [
+    "Laplace",
+    "Gaussian"
+  ],
+  "paper_protocol_epochs": 10,
+  "epoch_curve_epochs": 120,
+  "strict_composed_allocation": "20% data / 70% training / 10% output",
+  "delta": 1e-05,
+  "note": "Published numerical values were not hard-coded; results are actual outputs of the implementation."
+}
